@@ -162,7 +162,7 @@ export class JSDebugMessage extends DebugMessage {
           ? `${funcThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
           : ''
         : ''
-    }%c ${selectedVar}${extensionProperties.logMessageSuffix}%c${
+    }%c ${selectedVar}${extensionProperties.logMessageSuffix}${
       extensionProperties.quote
     }, 'background: green;color: white', 'background: rgba(59,14,234);color: black' , 'background: rgba(229,229,19);color: black',${selectedVar})${semicolon}`;
   }
