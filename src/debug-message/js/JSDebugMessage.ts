@@ -164,7 +164,7 @@ export class JSDebugMessage extends DebugMessage {
         : ''
     }%c ${selectedVar}${extensionProperties.logMessageSuffix}%c${
       extensionProperties.quote
-    }, 'background: green;color: white', 'background: pink;color: #bf2c9f' , 'background: yellow;color: #bf2c9f',${selectedVar})${semicolon}`;
+    }, 'background: green;color: white', 'background: rgba(59,14,234);color: black' , 'background: rgba(229,229,19);color: black',${selectedVar})${semicolon}`;
   }
 
   private emptyBlockDebuggingMsg(
@@ -238,6 +238,7 @@ export class JSDebugMessage extends DebugMessage {
       lineOfSelectedVar,
       selectedVar,
     );
+
     const deepObjectProperty =
       LogMessageType.MultilineBraces === logMsg.logMessageType
         ? this.deepObjectProperty(
