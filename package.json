@@ -1,9 +1,9 @@
 {
   "name": "turbo-console-log",
-  "displayName": "Turbo Console Log",
+  "displayName": "Turbo Console Log 加强版",
   "description": "Automating the process of writing meaningful log messages.",
   "version": "2.9.6",
-  "publisher": "ChakrounAnas",
+  "publisher": "linlinzhao",
   "engines": {
     "vscode": "^1.50.0"
   },
