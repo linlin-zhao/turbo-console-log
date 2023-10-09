@@ -1,27 +1,28 @@
+import _, { omit } from 'lodash';
 import { Position, TextDocument, TextEditorEdit, TextLine } from 'vscode';
 import {
   BlockType,
-  ExtensionProperties,
   BracketType,
+  ExtensionProperties,
+  LogBracketMetadata,
+  LogMessage,
   LogMessageType,
   Message,
-  LogMessage,
-  LogBracketMetadata,
   MultilineContextVariable,
 } from '../../entities';
-import { LineCodeProcessing } from '../../line-code-processing';
-import _, { omit } from 'lodash';
-import { DebugMessage } from '../DebugMessage';
-import { DebugMessageLine } from '../DebugMessageLine';
-import {
-  getMultiLineContextVariable,
-  closingBracketLine,
-} from '../../utilities';
-import { JSDebugMessageAnonymous } from './JSDebugMessageAnonymous';
 import {
   LogParenthesisMetadata,
   NamedFunctionMetadata,
 } from '../../entities/extension/logMessage';
+import { LineCodeProcessing } from '../../line-code-processing';
+import {
+  closingBracketLine,
+  getMultiLineContextVariable,
+  guid,
+} from '../../utilities';
+import { DebugMessage } from '../DebugMessage';
+import { DebugMessageLine } from '../DebugMessageLine';
+import { JSDebugMessageAnonymous } from './JSDebugMessageAnonymous';
 
 const logMessageTypeVerificationPriority = _.sortBy(
   [
@@ -136,7 +137,7 @@ export class JSDebugMessage extends DebugMessage {
       extensionProperties.logFunction !== 'log'
         ? extensionProperties.logFunction
         : `console.${extensionProperties.logType}`
-    }(${extensionProperties.quote}${extensionProperties.logMessagePrefix}${
+    }(${extensionProperties.quote}%c LOG_ID: [${guid()}] ~ %c${extensionProperties.logMessagePrefix}${
       extensionProperties.logMessagePrefix.length !== 0 &&
       extensionProperties.logMessagePrefix !==
         `${extensionProperties.delimiterInsideMessage} `
@@ -161,9 +162,9 @@ export class JSDebugMessage extends DebugMessage {
           ? `${funcThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
           : ''
         : ''
-    }${selectedVar}${extensionProperties.logMessageSuffix}${
+    }%c ${selectedVar}${extensionProperties.logMessageSuffix}%c${
       extensionProperties.quote
-    }, ${selectedVar})${semicolon}`;
+    }, 'background: green;color: white', 'background: pink;color: #bf2c9f' , 'background: yellow;color: #bf2c9f',${selectedVar})${semicolon}`;
   }
 
   private emptyBlockDebuggingMsg(

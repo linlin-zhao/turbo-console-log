@@ -1,12 +1,11 @@
-import { locBrackets } from './locBrackets';
-import { getMultiLineContextVariable } from './getMultiLineContextVariable';
 import { closingBracketLine } from './closingBracketLine';
-import { spacesBeforeLine } from './spacesBeforeLine';
+import { getMultiLineContextVariable } from './getMultiLineContextVariable';
 import { getTabSize } from './getTabSize';
+import { guid } from './guid';
+import { locBrackets } from './locBrackets';
+import { spacesBeforeLine } from './spacesBeforeLine';
 export {
-  locBrackets,
-  getMultiLineContextVariable,
-  closingBracketLine,
-  spacesBeforeLine,
-  getTabSize,
+  closingBracketLine, getMultiLineContextVariable, getTabSize,
+  guid, locBrackets, spacesBeforeLine
 };
+
