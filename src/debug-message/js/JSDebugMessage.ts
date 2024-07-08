@@ -117,19 +117,19 @@ export class JSDebugMessage extends DebugMessage {
       'wrapLogMessage' | 'insertEmptyLineAfterLogMessage'
     >,
   ): string {
-    // const fileName = document.fileName.includes('/')
-    //   ? document.fileName.split('/')[document.fileName.split('/').length - 1]
-    //   : document.fileName.split('\\')[document.fileName.split('\\').length - 1];
-    // const funcThatEncloseTheVar: string = this.enclosingBlockName(
-    //   document,
-    //   lineOfSelectedVar,
-    //   'function',
-    // );
-    // const classThatEncloseTheVar: string = this.enclosingBlockName(
-    //   document,
-    //   lineOfSelectedVar,
-    //   'class',
-    // );
+    const fileName = document.fileName.includes('/')
+      ? document.fileName.split('/')[document.fileName.split('/').length - 1]
+      : document.fileName.split('\\')[document.fileName.split('\\').length - 1];
+    const funcThatEncloseTheVar: string = this.enclosingBlockName(
+      document,
+      lineOfSelectedVar,
+      'function',
+    );
+    const classThatEncloseTheVar: string = this.enclosingBlockName(
+      document,
+      lineOfSelectedVar,
+      'class',
+    );
     const semicolon: string = extensionProperties.addSemicolonInTheEnd
       ? ';'
       : '';
@@ -145,6 +145,27 @@ export class JSDebugMessage extends DebugMessage {
         `${extensionProperties.delimiterInsideMessage} `
         ? ` ${extensionProperties.delimiterInsideMessage} `
         : ''
+    }${
+      extensionProperties.includeFileNameAndLineNum
+        ? `file: ${fileName}:${
+            lineOfLogMsg +
+            (extensionProperties.insertEmptyLineBeforeLogMessage ? 2 : 1)
+          } ${extensionProperties.delimiterInsideMessage} `
+        : ''
+    }${
+      extensionProperties.insertEnclosingClass
+        ? classThatEncloseTheVar.length > 0
+          ? `${classThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
+          : ``
+        : ''
+    }${
+      extensionProperties.insertEnclosingFunction
+        ? funcThatEncloseTheVar.length > 0
+          ? `${funcThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
+          : ''
+        : ''
+    }%c ${selectedVar}${extensionProperties.logMessageSuffix}${
+      extensionProperties.quote
     },${selectedVar})${semicolon}`;
   }
 
