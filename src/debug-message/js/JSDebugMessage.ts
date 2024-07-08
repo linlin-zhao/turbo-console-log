@@ -117,19 +117,19 @@ export class JSDebugMessage extends DebugMessage {
       'wrapLogMessage' | 'insertEmptyLineAfterLogMessage'
     >,
   ): string {
-    const fileName = document.fileName.includes('/')
-      ? document.fileName.split('/')[document.fileName.split('/').length - 1]
-      : document.fileName.split('\\')[document.fileName.split('\\').length - 1];
-    const funcThatEncloseTheVar: string = this.enclosingBlockName(
-      document,
-      lineOfSelectedVar,
-      'function',
-    );
-    const classThatEncloseTheVar: string = this.enclosingBlockName(
-      document,
-      lineOfSelectedVar,
-      'class',
-    );
+    // const fileName = document.fileName.includes('/')
+    //   ? document.fileName.split('/')[document.fileName.split('/').length - 1]
+    //   : document.fileName.split('\\')[document.fileName.split('\\').length - 1];
+    // const funcThatEncloseTheVar: string = this.enclosingBlockName(
+    //   document,
+    //   lineOfSelectedVar,
+    //   'function',
+    // );
+    // const classThatEncloseTheVar: string = this.enclosingBlockName(
+    //   document,
+    //   lineOfSelectedVar,
+    //   'class',
+    // );
     const semicolon: string = extensionProperties.addSemicolonInTheEnd
       ? ';'
       : '';
@@ -137,34 +137,15 @@ export class JSDebugMessage extends DebugMessage {
       extensionProperties.logFunction !== 'log'
         ? extensionProperties.logFunction
         : `console.${extensionProperties.logType}`
-    }(${extensionProperties.quote}%c LOG_ID: [${guid()}] ~ %c${extensionProperties.logMessagePrefix}${
+    }(${extensionProperties.quote}%c LOG_ID: [${guid()}] ~ %c${
+      extensionProperties.logMessagePrefix
+    }${
       extensionProperties.logMessagePrefix.length !== 0 &&
       extensionProperties.logMessagePrefix !==
         `${extensionProperties.delimiterInsideMessage} `
         ? ` ${extensionProperties.delimiterInsideMessage} `
         : ''
-    }${
-      extensionProperties.includeFileNameAndLineNum
-        ? `file: ${fileName}:${
-            lineOfLogMsg +
-            (extensionProperties.insertEmptyLineBeforeLogMessage ? 2 : 1)
-          } ${extensionProperties.delimiterInsideMessage} `
-        : ''
-    }${
-      extensionProperties.insertEnclosingClass
-        ? classThatEncloseTheVar.length > 0
-          ? `${classThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
-          : ``
-        : ''
-    }${
-      extensionProperties.insertEnclosingFunction
-        ? funcThatEncloseTheVar.length > 0
-          ? `${funcThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
-          : ''
-        : ''
-    }%c ${selectedVar}${extensionProperties.logMessageSuffix}${
-      extensionProperties.quote
-    }, 'background: green;color: white', 'background: rgba(59,14,234);color: white' , 'background: rgba(229,229,19);color: black',${selectedVar})${semicolon}`;
+    },${selectedVar})${semicolon}`;
   }
 
   private emptyBlockDebuggingMsg(
