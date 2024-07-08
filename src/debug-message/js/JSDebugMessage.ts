@@ -137,7 +137,7 @@ export class JSDebugMessage extends DebugMessage {
       extensionProperties.logFunction !== 'log'
         ? extensionProperties.logFunction
         : `console.${extensionProperties.logType}`
-    }(${extensionProperties.quote}%c LOG_ID: [${guid()}] ~ %c${
+    }(${extensionProperties.quote} LOG_ID: [${guid()}] ~ ${
       extensionProperties.logMessagePrefix
     }${
       extensionProperties.logMessagePrefix.length !== 0 &&
@@ -164,7 +164,7 @@ export class JSDebugMessage extends DebugMessage {
           ? `${funcThatEncloseTheVar} ${extensionProperties.delimiterInsideMessage} `
           : ''
         : ''
-    }%c ${selectedVar}${extensionProperties.logMessageSuffix}${
+    } ${selectedVar}${extensionProperties.logMessageSuffix}${
       extensionProperties.quote
     },${selectedVar})${semicolon}`;
   }
